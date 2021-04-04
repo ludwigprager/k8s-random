@@ -28,19 +28,20 @@ const (
 )
 
 var (
-	port         = 8765
-	httpListener = flag.String("listen", ":"+"8765", "listen port")
+	port         = 8085
+	httpListener = flag.String("listen", ":"+"8085", "listen port")
 	//httpListener = flag.String("listen", ":" + port, "listen port")
 	htmlDocument = flag.String("document", "./index.html", "default document")
 
 	access_logger *log.Logger
 	//accessLogfile = flag.String("access_log", "./access_log", "Pfad zur access_log")
-	accessLogfile = "/access_log"
+	accessLogfile = "./access_log"
 	htmlFallback  = []byte("<html><head><title>404</title></head><body><h1>404</body></html>")
 
 	healthy int32
 
 	cdr_csv = "/var/log/asterisk/cdr-csv/Master.csv"
+	//cdr_csv = "./Master.csv"
 	records [][]string
 	tmprec  = [][]string{
 		{"bla", "jkl"},
@@ -83,7 +84,7 @@ func main() {
 
 	http.HandleFunc("/", cdr)
 
-	log.Fatal(http.ListenAndServe(":8765", nil))
+	log.Fatal(http.ListenAndServe(":8085", nil))
 }
 
 func cdr(w http.ResponseWriter, r *http.Request) {
