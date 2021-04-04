@@ -35,7 +35,7 @@ var (
 
 	access_logger *log.Logger
 	//accessLogfile = flag.String("access_log", "./access_log", "Pfad zur access_log")
-	accessLogfile = "./access_log"
+	accessLogfile = "/access_log"
 	htmlFallback  = []byte("<html><head><title>404</title></head><body><h1>404</body></html>")
 
 	healthy int32

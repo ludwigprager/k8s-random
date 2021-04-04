@@ -14,3 +14,14 @@ curl http://localhost:8085/cdr/
 # mit strip:
 GOOS=linux  GOARCH=arm GOARM=5  go build -ldflags="-s -w" cdr-viewer.go 
 
+---
+
+
+k run rand --image=ludwigprager/k8s-random --env=READINESS=100
+k expose pod rand --name=rand2 --port=8085
+
+
+
+k run c --rm --restart=Never -ti --image=busybox -- /bin/sh -c 'wget http://10.1.180.70:8085'
+k run c --rm --restart=Never -ti --image=busybox -- /bin/sh -c 'wget http://rand2:8085'
+
