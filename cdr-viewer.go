@@ -28,8 +28,8 @@ const (
 )
 
 var (
-	port         = 8085
-	httpListener = flag.String("listen", ":"+"8085", "listen port")
+	port         = 8765
+	httpListener = flag.String("listen", ":"+"8765", "listen port")
 	//httpListener = flag.String("listen", ":" + port, "listen port")
 	htmlDocument = flag.String("document", "./index.html", "default document")
 
@@ -180,20 +180,3 @@ func cdr(w http.ResponseWriter, r *http.Request) {
 
 }
 
-//func cdr(logger *log.Logger) http.Handler {
-func cdrALT(w http.ResponseWriter, r *http.Request) {
-	//f, _ := os.Open(cdr_csv)
-
-	//rec := csv.NewReader(f)
-
-	//records, _ := r.readAll()
-
-	//	document := []byte("<html><head><title>404</title></head><body><h1>404 hamma neda</body></html>")
-
-	//fmt.Fprintf(w, string(document))
-	//fmt.Fprintf(w, records[0][0])
-	//fmt.Fprintf(w, records[1][1])
-
-	//fmt.Fprintf(w, records[1][1])
-
-}

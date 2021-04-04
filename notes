@@ -17,11 +17,28 @@ GOOS=linux  GOARCH=arm GOARM=5  go build -ldflags="-s -w" cdr-viewer.go
 ---
 
 
-k run rand --image=ludwigprager/k8s-random --env=READINESS=100
-k expose pod rand --name=rand2 --port=8085
+k run rand --image=ludwigprager/k8s-random --env=READINESS=100 --labels=rand=true
 
 
 
-k run c --rm --restart=Never -ti --image=busybox -- /bin/sh -c 'wget http://10.1.180.70:8085'
-k run c --rm --restart=Never -ti --image=busybox -- /bin/sh -c 'wget http://rand2:8085'
+#k run c --rm --restart=Never -ti --image=busybox -- /bin/sh -c 'wget http://10.1.180.70:8085'
 
+# doesn't work, see https://github.com/kubernetes/kubernetes/issues/59551
+# k expose pod --selector=rand=true --name=rand2 --port=8085
+
+cat << EOF | kubectl create -f -
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rand
+spec:
+  selector:
+    rand: "true"
+  ports:
+  - port: 8085
+    protocol: TCP
+
+EOF
+
+k run c --rm --restart=Never -ti --image=busybox -- /bin/sh -c 'wget http://rand:8085'
