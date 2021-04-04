@@ -8,6 +8,9 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
+	"strconv"
+	"math/rand"
 
 	//	"io"
 	//	"os/signal"
@@ -62,9 +65,25 @@ func init() {
 }
 
 func main() {
+
+        fmt.Println("READINESS:", os.Getenv("READINESS"))
+        READINESS := os.Getenv("READINESS")
+
+        f1, _ := strconv.ParseFloat(READINESS, 64)
+
+
+        rand.Seed(time.Now().UnixNano())
+
+        f := rand.Float64() * f1
+        fmt.Println("f:", f)
+
+        if(f < 50) {
+                os.Exit(3)
+        }
+
 	http.HandleFunc("/", cdr)
 
-	log.Fatal(http.ListenAndServe(":8085", nil))
+	log.Fatal(http.ListenAndServe(":8765", nil))
 }
 
 func cdr(w http.ResponseWriter, r *http.Request) {
