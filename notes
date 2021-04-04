@@ -1,0 +1,16 @@
+
+
+k run -ti tool --image=ludwigprager/net-tool-arm32v6:1 --restart=Never -- /bin/bash
+
+
+
+env GOOS=linux GOARCH=arm GOARM=5 go build
+
+
+go run cdr-viewer.go &
+curl http://localhost:8085/cdr/
+
+
+# mit strip:
+GOOS=linux  GOARCH=arm GOARM=5  go build -ldflags="-s -w" cdr-viewer.go 
+
