@@ -5,24 +5,12 @@ FROM golang:alpine3.13
 
 RUN apk add --no-cache \
   bash \
-  bind-tools \
-  bridge-utils \
-  apache2-utils \
-  conntrack-tools \
   curl \
-  dhcping \
-  ethtool \
   file\
-  fping \
-  iperf \
   iproute2 \
   ipset \
-  iptables \ 
-  iptraf-ng \
   iputils \
-  jq \
   libc6-compat \
-  liboping \
   net-snmp-tools \
   netcat-openbsd \
   nftables \
