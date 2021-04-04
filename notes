@@ -17,7 +17,7 @@ GOOS=linux  GOARCH=arm GOARM=5  go build -ldflags="-s -w" cdr-viewer.go
 ---
 
 
-k run rand --image=ludwigprager/k8s-random --env=READINESS=100 --labels=rand=true
+k run rand --image=ludwigprager/k8s-random --env=READINESS=100 --labels=rand=true --image-pull-policy=Always
 
 
 
