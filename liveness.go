@@ -12,7 +12,7 @@ import (
 
 func main() {
 	started := time.Now()
-	http.HandleFunc("/started", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/readz", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
 		data := (time.Since(started)).String()
 		w.Write([]byte(data))
