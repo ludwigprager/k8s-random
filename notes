@@ -87,3 +87,9 @@ export FAILURE_RATE=20
 
 go run server.go
 
+----
+
+source set-env.sh
+docker login --username=ludwigprager
+docker tag $K8S_RANDOM_IMAGE $K8S_RANDOM_IMAGE
+docker push  $K8S_RANDOM_IMAGE
