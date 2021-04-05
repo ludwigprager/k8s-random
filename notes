@@ -52,7 +52,10 @@ go run liveness.go
 
 
 PORT=8765
-k run rand --image=ludwigprager/k8s-random --env=READINESS=100 --labels=rand=true --image-pull-policy=Always
+kubectl run rand --image=ludwigprager/k8s-random \
+  --env=READINESS=100 \
+  --labels=rand=true \
+  --image-pull-policy=Always
 
 cat << EOF | kubectl create -f -
 
@@ -69,5 +72,9 @@ spec:
 
 EOF
 
-k run c --rm --restart=Never -ti --image=busybox -- /bin/sh -c "wget http://rand:${PORT}"
+kubectl run c --rm \
+  --restart=Never \
+  -ti \
+  --image=busybox \
+  -- /bin/sh -c "wget http://rand:${PORT}/healthz"
 
