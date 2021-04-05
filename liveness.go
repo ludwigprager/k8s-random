@@ -25,7 +25,7 @@ func main() {
 			w.Write([]byte("ok"))
 		} else {
 			w.WriteHeader(500)
-			w.Write([]byte("error: getting ready"))
+			w.Write([]byte(fmt.Sprintf("error, getting ready: %v", duration.Seconds())))
 		}
 	})
 	http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
