@@ -30,7 +30,7 @@ RUN apk add --no-cache \
 ADD main.go /
 ADD cdr-viewer.go /
 ADD access_log /
-ADD server.go /
+ADD liveness.go /
 
 RUN mkdir -p /var/log/asterisk/cdr-csv/
 ADD Master.csv /var/log/asterisk/cdr-csv/Master.csv
@@ -38,5 +38,5 @@ ADD Master.csv /var/log/asterisk/cdr-csv/Master.csv
 #CMD ["/bin/bash","-l"]
 # go run cdr-viewer.go &
 #CMD ["go", "run", "/cdr-viewer.go"]
-CMD ["go", "run", "/server.go"]
+CMD ["go", "run", "/liveness.go"]
 

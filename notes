@@ -47,3 +47,27 @@ k run c --rm --restart=Never -ti --image=busybox -- /bin/sh -c 'wget http://rand
 
 
 go run liveness.go
+
+---
+
+
+PORT=8765
+k run rand --image=ludwigprager/k8s-random --env=READINESS=100 --labels=rand=true --image-pull-policy=Always
+
+cat << EOF | kubectl create -f -
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rand
+spec:
+  selector:
+    rand: "true"
+  ports:
+  - port: ${PORT}
+    protocol: TCP
+
+EOF
+
+k run c --rm --restart=Never -ti --image=busybox -- /bin/sh -c "wget http://rand:${PORT}"
+
