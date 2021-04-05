@@ -78,3 +78,12 @@ kubectl run c --rm \
   --image=busybox \
   -- /bin/sh -c "wget http://rand:${PORT}/healthz"
 
+
+
+---
+
+export MODE=RANDOMFAIL
+export FAILURE_RATE=20
+
+go run server.go
+
