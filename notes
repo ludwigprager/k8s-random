@@ -42,3 +42,8 @@ spec:
 EOF
 
 k run c --rm --restart=Never -ti --image=busybox -- /bin/sh -c 'wget http://rand:8085'
+
+---
+
+
+go run liveness.go
