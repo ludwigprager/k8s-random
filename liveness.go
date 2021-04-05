@@ -1,6 +1,6 @@
 
-// will reports unhealthy after 15 sec
-// will reports ready     after 20 sec
+// will reports healtyh after 15 sec
+// will reports ready   after 20 sec
 
 package main
 
@@ -31,11 +31,11 @@ func main() {
 	http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
 		duration := time.Since(started)
 		if duration.Seconds() > 15 {
-			w.WriteHeader(500)
-			w.Write([]byte(fmt.Sprintf("error: %v", duration.Seconds())))
-		} else {
 			w.WriteHeader(200)
 			w.Write([]byte("ok"))
+		} else {
+			w.WriteHeader(500)
+			w.Write([]byte(fmt.Sprintf("error: %v", duration.Seconds())))
 		}
 	})
 	log.Fatal(http.ListenAndServe(":8765", nil))
